@@ -1,5 +1,5 @@
 import { getCategories } from "@/lib/google-drive";
-
+export const dynamic = 'force-dynamic';
 export default async function AdminPage() {
   const categories = await getCategories();
 
