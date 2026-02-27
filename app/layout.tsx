@@ -3,24 +3,26 @@ import "./globals.css";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Chrispine Abala Ashiruma | Cinematic Video Editor & Film Director in Kenya",
-  description: "Cinematic video editor and film director in Kenya. Chrispine Abala specializes in social media video editing, documentaries, commercials, and branded storytelling.",
+  title: "Cinematic Video Editor for Brands, Agencies & YouTube Channels | Chrispine Abala",
+  description: "Professional cinematic video editor working remotely with brands, YouTubers, and agencies worldwide. Specializing in commercial, documentary, and high-retention digital content.",
   keywords: [
-    "Video editor in Kenya",
+    "Remote video editor",
+    "Freelance video editor",
     "Cinematic video editor",
-    "Professional video editor Nairobi",
-    "Documentary editor Kenya",
-    "Social media video editor",
+    "YouTube video editor for hire",
     "Commercial video editor",
-    "Film director Kenya",
-    "Video production Kenya",
+    "Documentary video editor",
+    "Professional video editor for brands",
+    "Video editor for agencies",
+    "High retention YouTube editor",
+    "Online video editor",
     "Chrispine Abala",
     "Mbogiwood Productions",
   ],
   authors: [{ name: "Chrispine Abala Ashiruma" }],
   openGraph: {
-    title: "Chrispine Abala Ashiruma | Cinematic Video Editor & Film Director in Kenya",
-    description: "Cinematic video editor and film director in Kenya. Specializing in social media video editing, documentaries, commercials, and branded storytelling.",
+    title: "Cinematic Video Editor for Brands, Agencies & YouTube Channels | Chrispine Abala",
+    description: "Professional cinematic video editor working remotely with brands, YouTubers, and agencies worldwide.",
     images: [
       {
         url: "https://dir-chris-abala.vercel.app/og-image.jpg",
@@ -31,8 +33,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Chrispine Abala Ashiruma | Cinematic Video Editor & Film Director in Kenya",
-    description: "Professional cinematic video editor working remotely with brands, YouTubers, and agencies worldwide. Specializing in commercial, documentary, and high-retention digital content.",
+    title: "Cinematic Video Editor for Brands, Agencies & YouTube Channels | Chrispine Abala",
+    description: "Professional cinematic video editor working remotely with brands, YouTubers, and agencies worldwide.",
     images: ["https://dir-chris-abala.vercel.app/og-image.jpg"],
   },
 };
@@ -43,6 +45,24 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Person",
+              "name": "Chrispine Abala Ashiruma",
+              "jobTitle": "Cinematic Video Editor",
+              "description": "Professional cinematic video editor specializing in documentaries, commercial content, and high-retention YouTube editing.",
+              "url": "https://dir-chris-abala.vercel.app/",
+              "worksFor": {
+                "@type": "Organization",
+                "name": "Mbogiwood Productions PLC",
+              },
+              "sameAs": [],
+            }),
+          }}
+        />
         <header style={{ backgroundColor: "#291011", borderBottom: "2px solid #16a34a", position: "sticky", top: 0, zIndex: 100, padding: "0 20px", boxShadow: "0 2px 5px rgba(0,0,0,0.3)" }}>
           <div style={{ maxWidth: "1200px", margin: "0 auto", display: "flex", justifyContent: "space-between", alignItems: "center", height: "80px" }}>
             <Link href="/" style={{ fontFamily: "'Oswald', sans-serif", fontSize: "1.2em", fontWeight: 700, textTransform: "uppercase", letterSpacing: "1px" }}>
@@ -51,6 +71,7 @@ export default function RootLayout({
             </Link>
             <nav style={{ display: "flex", gap: "25px", alignItems: "center" }}>
               <Link href="/work" className="nav-link">Work</Link>
+              <Link href="/#services" className="nav-link">Services</Link>
               <Link href="/#contact" className="nav-link">Contact</Link>
               <a href="https://drive.google.com/uc?export=download&id=1r_EA6Kga8CmEXWA1z2iUXd-GBr5OmeyL" download className="nav-cv">Download CV</a>
             </nav>
