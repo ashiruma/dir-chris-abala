@@ -32,21 +32,41 @@ export interface Category {
   images: DriveImage[];
 }
 
+const DEMO_CATEGORIES: Category[] = [
+  {
+    id: "demo-1",
+    title: "Visual Documentary",
+    slug: "visual-documentary",
+    images: [
+      { id: "d1", title: "Documentary 1", url: "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?q=80&w=800", thumbnailUrl: "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?q=80&w=400", type: "image" },
+      { id: "d2", title: "Documentary 2", url: "https://images.unsplash.com/photo-1504439904031-93ded9f93e4e?q=80&w=800", thumbnailUrl: "https://images.unsplash.com/photo-1504439904031-93ded9f93e4e?q=80&w=400", type: "image" },
+      { id: "d3", title: "Documentary 3", url: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=800", thumbnailUrl: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=400", type: "image" },
+    ],
+  },
+  {
+    id: "demo-2",
+    title: "Brand Narrative",
+    slug: "brand-narrative",
+    images: [
+      { id: "b1", title: "Brand 1", url: "https://images.unsplash.com/photo-1542038784456-1ea8e935640e?q=80&w=800", thumbnailUrl: "https://images.unsplash.com/photo-1542038784456-1ea8e935640e?q=80&w=400", type: "image" },
+      { id: "b2", title: "Brand 2", url: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?q=80&w=800", thumbnailUrl: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?q=80&w=400", type: "image" },
+      { id: "b3", title: "Brand 3", url: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=800", thumbnailUrl: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=400", type: "image" },
+    ],
+  },
+  {
+    id: "demo-3",
+    title: "Portrait Series",
+    slug: "portrait-series",
+    images: [
+      { id: "p1", title: "Portrait 1", url: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?q=80&w=800", thumbnailUrl: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?q=80&w=400", type: "image" },
+      { id: "p2", title: "Portrait 2", url: "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?q=80&w=800", thumbnailUrl: "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?q=80&w=400", type: "image" },
+    ],
+  },
+];
+
 export async function getCategories(): Promise<Category[]> {
   if (!drive) {
-    // Demo data so the site builds and goes live
-    return [
-      {
-        id: "demo",
-        title: "Demo Work",
-        slug: "demo-work",
-        images: [
-          { id: "1", title: "Demo Image 1", url: "https://picsum.photos/id/1015/800/600", thumbnailUrl: "https://picsum.photos/id/1015/400/300", type: "image" },
-          { id: "2", title: "Demo Image 2", url: "https://picsum.photos/id/102/800/600", thumbnailUrl: "https://picsum.photos/id/102/400/300", type: "image" },
-          { id: "3", title: "Demo Image 3", url: "https://picsum.photos/id/106/800/600", thumbnailUrl: "https://picsum.photos/id/106/400/300", type: "image" },
-        ],
-      },
-    ];
+    return DEMO_CATEGORIES;
   }
 
   const rootId = process.env.GOOGLE_DRIVE_ROOT_FOLDER_ID!;
@@ -54,6 +74,7 @@ export async function getCategories(): Promise<Category[]> {
   const foldersRes = await drive.files.list({
     q: `'${rootId}' in parents and mimeType='application/vnd.google-apps.folder' and trashed=false`,
     fields: 'files(id, name)',
+    pageSize: 50,
   });
 
   const categories: Category[] = [];
@@ -71,10 +92,16 @@ export async function getCategories(): Promise<Category[]> {
   return categories.sort((a, b) => a.title.localeCompare(b.title));
 }
 
+export async function getCategoryBySlug(slug: string): Promise<Category | null> {
+  const categories = await getCategories();
+  return categories.find((c) => c.slug === slug) || null;
+}
+
 async function getMediaFromFolder(folderId: string): Promise<DriveImage[]> {
   const res = await drive.files.list({
     q: `'${folderId}' in parents and trashed=false`,
     fields: 'files(id, name, mimeType, thumbnailLink, webViewLink)',
+    pageSize: 50,
   });
 
   return (res.data.files || []).map((file: any) => ({

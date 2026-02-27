@@ -215,3 +215,6 @@ img {
 .service-card:hover {
     transform: translateY(-4px);
 }
+.gallery-thumb:hover img {
+    transform: scale(1.05);
+}
