@@ -15,7 +15,6 @@ export default function GalleryGrid({ images }: { images: Image[] }) {
 
   return (
     <>
-      {/* GRID */}
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))", gap: "16px" }}>
         {images.map((img) => (
           <div
@@ -34,7 +33,6 @@ export default function GalleryGrid({ images }: { images: Image[] }) {
         ))}
       </div>
 
-      {/* LIGHTBOX */}
       {lightbox && (
         <div
           onClick={() => setLightbox(null)}
@@ -64,7 +62,6 @@ export default function GalleryGrid({ images }: { images: Image[] }) {
             </p>
           </div>
 
-          {/* PREV / NEXT */}
           <button
             onClick={(e) => {
               e.stopPropagation();
