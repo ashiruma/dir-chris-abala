@@ -2,15 +2,6 @@
 import "server-only";
 import { google } from 'googleapis';
 
-const serviceAccount = JSON.parse(process.env.GOOGLE_SERVICE_ACCOUNT_JSON || '{}');
-
-const auth = new google.auth.GoogleAuth({
-  credentials: serviceAccount,
-  scopes: ['https://www.googleapis.com/auth/drive.readonly'],
-});
-
-const drive = google.drive({ version: 'v3', auth });
-
 export interface DriveImage {
   id: string;
   title: string;
@@ -26,7 +17,17 @@ export interface Category {
   images: DriveImage[];
 }
 
+function getDrive() {
+  const serviceAccount = JSON.parse(process.env.GOOGLE_SERVICE_ACCOUNT_JSON || '{}');
+  const auth = new google.auth.GoogleAuth({
+    credentials: serviceAccount,
+    scopes: ['https://www.googleapis.com/auth/drive.readonly'],
+  });
+  return google.drive({ version: 'v3', auth });
+}
+
 export async function getCategories(): Promise<Category[]> {
+  const drive = getDrive();
   const rootId = process.env.GOOGLE_DRIVE_ROOT_FOLDER_ID!;
 
   const foldersRes = await drive.files.list({
@@ -50,6 +51,8 @@ export async function getCategories(): Promise<Category[]> {
 }
 
 async function getMediaFromFolder(folderId: string): Promise<DriveImage[]> {
+  const drive = getDrive();
+
   const res = await drive.files.list({
     q: `'${folderId}' in parents and trashed=false`,
     fields: 'files(id, name, mimeType, thumbnailLink, webViewLink)',
