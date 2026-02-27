@@ -3,13 +3,24 @@ import "./globals.css";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Chrispine Abala | Visual Storyteller",
-  description: "Professional photographer and visual storyteller based in Kakamega. Specializing in branding, documentary, and creative projects.",
-  keywords: ["Chrispine Abala", "Visual Storyteller", "Photographer Kakamega", "Branding", "Video Production", "Portfolio"],
-  authors: [{ name: "Chrispine Abala" }],
+  title: "Chrispine Abala Ashiruma | Cinematic Video Editor & Film Director in Kenya",
+  description: "Cinematic video editor and film director in Kenya. Chrispine Abala specializes in social media video editing, documentaries, commercials, and branded storytelling.",
+  keywords: [
+    "Video editor in Kenya",
+    "Cinematic video editor",
+    "Professional video editor Nairobi",
+    "Documentary editor Kenya",
+    "Social media video editor",
+    "Commercial video editor",
+    "Film director Kenya",
+    "Video production Kenya",
+    "Chrispine Abala",
+    "Mbogiwood Productions",
+  ],
+  authors: [{ name: "Chrispine Abala Ashiruma" }],
   openGraph: {
-    title: "Chrispine Abala | Visual Storyteller",
-    description: "Professional Videographer, photographer and visual storyteller based in Kakamega.",
+    title: "Chrispine Abala Ashiruma | Cinematic Video Editor & Film Director in Kenya",
+    description: "Cinematic video editor and film director in Kenya. Specializing in social media video editing, documentaries, commercials, and branded storytelling.",
     images: [
       {
         url: "https://dir-chris-abala.vercel.app/og-image.jpg",
@@ -20,8 +31,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Chrispine Abala | Visual Storyteller",
-    description: "Professional Videographer, photographer and visual storyteller based in Kakamega.",
+    title: "Chrispine Abala Ashiruma | Cinematic Video Editor & Film Director in Kenya",
+    description: "Professional cinematic video editor working remotely with brands, YouTubers, and agencies worldwide. Specializing in commercial, documentary, and high-retention digital content.",
     images: ["https://dir-chris-abala.vercel.app/og-image.jpg"],
   },
 };
@@ -41,7 +52,7 @@ export default function RootLayout({
             <nav style={{ display: "flex", gap: "25px", alignItems: "center" }}>
               <Link href="/work" className="nav-link">Work</Link>
               <Link href="/#contact" className="nav-link">Contact</Link>
-              <a href="/cv.pdf" download className="nav-cv">Download CV</a>
+              <a href="https://drive.google.com/uc?export=download&id=1r_EA6Kga8CmEXWA1z2iUXd-GBr5OmeyL" download className="nav-cv">Download CV</a>
             </nav>
           </div>
         </header>

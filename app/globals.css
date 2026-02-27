@@ -218,3 +218,20 @@ img {
 .gallery-thumb:hover img {
     transform: scale(1.05);
 }
+.btn-yellow {
+    display: inline-block;
+    border: 2px solid #facc15;
+    color: #facc15;
+    padding: 14px 32px;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    font-size: 0.8em;
+    font-weight: 700;
+    font-family: 'Montserrat', sans-serif;
+    transition: all 0.3s ease;
+}
+
+    .btn-yellow:hover {
+        background-color: #facc15;
+        color: #1a1a1a;
+    }
