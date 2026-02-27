@@ -2,8 +2,10 @@
 import "server-only";
 import { google } from 'googleapis';
 
+const serviceAccount = JSON.parse(process.env.GOOGLE_SERVICE_ACCOUNT_JSON || '{}');
+
 const auth = new google.auth.GoogleAuth({
-  keyFile: process.env.GOOGLE_SERVICE_ACCOUNT_FILE,
+  credentials: serviceAccount,
   scopes: ['https://www.googleapis.com/auth/drive.readonly'],
 });
 
