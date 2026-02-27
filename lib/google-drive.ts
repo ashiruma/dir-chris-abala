@@ -77,7 +77,7 @@ async function getMediaFromFolder(folderId: string): Promise<DriveImage[]> {
     fields: 'files(id, name, mimeType, thumbnailLink, webViewLink)',
   });
 
-  return (res.data.files || []).map(file => ({
+  return (res.data.files || []).map((file: any) => ({
     id: file.id!,
     title: file.name!,
     url: `https://drive.google.com/uc?id=${file.id}`,
