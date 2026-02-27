@@ -2,6 +2,19 @@
 import "server-only";
 import { google } from 'googleapis';
 
+let drive: any = null;
+
+try {
+  const serviceAccount = JSON.parse(process.env.GOOGLE_SERVICE_ACCOUNT_JSON || '{}');
+  const auth = new google.auth.GoogleAuth({
+    credentials: serviceAccount,
+    scopes: ['https://www.googleapis.com/auth/drive.readonly'],
+  });
+  drive = google.drive({ version: 'v3', auth });
+} catch (e) {
+  console.log("Drive key not set yet - using demo mode");
+}
+
 export interface DriveImage {
   id: string;
   title: string;
@@ -17,17 +30,22 @@ export interface Category {
   images: DriveImage[];
 }
 
-function getDrive() {
-  const serviceAccount = JSON.parse(process.env.GOOGLE_SERVICE_ACCOUNT_JSON || '{}');
-  const auth = new google.auth.GoogleAuth({
-    credentials: serviceAccount,
-    scopes: ['https://www.googleapis.com/auth/drive.readonly'],
-  });
-  return google.drive({ version: 'v3', auth });
-}
-
 export async function getCategories(): Promise<Category[]> {
-  const drive = getDrive();
+  if (!drive) {
+    // Demo data for build and initial live site
+    return [
+      {
+        id: "demo",
+        title: "Demo Work",
+        slug: "demo-work",
+        images: [
+          { id: "1", title: "Demo Image", url: "https://picsum.photos/id/1015/800/600", thumbnailUrl: "https://picsum.photos/id/1015/400/300", type: "image" },
+          { id: "2", title: "Demo Image 2", url: "https://picsum.photos/id/102/800/600", thumbnailUrl: "https://picsum.photos/id/102/400/300", type: "image" },
+        ],
+      },
+    ];
+  }
+
   const rootId = process.env.GOOGLE_DRIVE_ROOT_FOLDER_ID!;
 
   const foldersRes = await drive.files.list({
@@ -51,8 +69,6 @@ export async function getCategories(): Promise<Category[]> {
 }
 
 async function getMediaFromFolder(folderId: string): Promise<DriveImage[]> {
-  const drive = getDrive();
-
   const res = await drive.files.list({
     q: `'${folderId}' in parents and trashed=false`,
     fields: 'files(id, name, mimeType, thumbnailLink, webViewLink)',
