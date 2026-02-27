@@ -5,14 +5,16 @@ import { google } from 'googleapis';
 let drive: any = null;
 
 try {
-  const serviceAccount = JSON.parse(process.env.GOOGLE_SERVICE_ACCOUNT_JSON || '{}');
-  const auth = new google.auth.GoogleAuth({
-    credentials: serviceAccount,
-    scopes: ['https://www.googleapis.com/auth/drive.readonly'],
-  });
-  drive = google.drive({ version: 'v3', auth });
+  if (process.env.GOOGLE_SERVICE_ACCOUNT_JSON) {
+    const serviceAccount = JSON.parse(process.env.GOOGLE_SERVICE_ACCOUNT_JSON);
+    const auth = new google.auth.GoogleAuth({
+      credentials: serviceAccount,
+      scopes: ['https://www.googleapis.com/auth/drive.readonly'],
+    });
+    drive = google.drive({ version: 'v3', auth });
+  }
 } catch (e) {
-  console.log("Drive key not set yet - using demo mode");
+  console.log("Drive key not valid - using demo mode");
 }
 
 export interface DriveImage {
@@ -32,15 +34,16 @@ export interface Category {
 
 export async function getCategories(): Promise<Category[]> {
   if (!drive) {
-    // Demo data for build and initial live site
+    // Demo data so the site builds and goes live
     return [
       {
         id: "demo",
         title: "Demo Work",
         slug: "demo-work",
         images: [
-          { id: "1", title: "Demo Image", url: "https://picsum.photos/id/1015/800/600", thumbnailUrl: "https://picsum.photos/id/1015/400/300", type: "image" },
+          { id: "1", title: "Demo Image 1", url: "https://picsum.photos/id/1015/800/600", thumbnailUrl: "https://picsum.photos/id/1015/400/300", type: "image" },
           { id: "2", title: "Demo Image 2", url: "https://picsum.photos/id/102/800/600", thumbnailUrl: "https://picsum.photos/id/102/400/300", type: "image" },
+          { id: "3", title: "Demo Image 3", url: "https://picsum.photos/id/106/800/600", thumbnailUrl: "https://picsum.photos/id/106/400/300", type: "image" },
         ],
       },
     ];
