@@ -47,9 +47,12 @@ export default function GalleryGrid({ images }: { images: Image[] }) {
 
           <div onClick={(e) => e.stopPropagation()} style={{ maxWidth: "90vw", maxHeight: "90vh", position: "relative" }}>
             {lightbox.type === "video" ? (
-              <video controls autoPlay style={{ maxWidth: "90vw", maxHeight: "80vh", borderRadius: "4px" }}>
-                <source src={lightbox.url} />
-              </video>
+              <iframe
+                src={lightbox.url}
+                style={{ width: "80vw", height: "70vh", borderRadius: "4px", border: "none" }}
+                allow="autoplay"
+                allowFullScreen
+              />
             ) : (
               <img
                 src={lightbox.url}

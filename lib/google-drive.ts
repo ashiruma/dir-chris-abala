@@ -1,28 +1,13 @@
 // lib/google-drive.ts
 import "server-only";
-import { google } from 'googleapis';
-
-let drive: any = null;
-
-try {
-  if (process.env.GOOGLE_SERVICE_ACCOUNT_JSON) {
-    const serviceAccount = JSON.parse(process.env.GOOGLE_SERVICE_ACCOUNT_JSON);
-    const auth = new google.auth.GoogleAuth({
-      credentials: serviceAccount,
-      scopes: ['https://www.googleapis.com/auth/drive.readonly'],
-    });
-    drive = google.drive({ version: 'v3', auth });
-  }
-} catch (e) {
-  console.log("Drive key not valid - using demo mode");
-}
+import { google } from "googleapis";
 
 export interface DriveImage {
   id: string;
   title: string;
   url: string;
   thumbnailUrl: string;
-  type: 'image' | 'video';
+  type: "image" | "video";
 }
 
 export interface Category {
@@ -64,32 +49,63 @@ const DEMO_CATEGORIES: Category[] = [
   },
 ];
 
+function getDriveClient() {
+  const raw = process.env.GOOGLE_SERVICE_ACCOUNT_JSON;
+  if (!raw) return null;
+
+  try {
+    const serviceAccount = JSON.parse(raw);
+
+    if (serviceAccount.private_key) {
+      serviceAccount.private_key = serviceAccount.private_key.replace(/\\n/g, "\n");
+    }
+
+    const auth = new google.auth.GoogleAuth({
+      credentials: serviceAccount,
+      scopes: ["https://www.googleapis.com/auth/drive.readonly"],
+    });
+
+    return google.drive({ version: "v3", auth });
+  } catch (e) {
+    console.error("Failed to initialize Google Drive client:", e);
+    return null;
+  }
+}
+
 export async function getCategories(): Promise<Category[]> {
+  const drive = getDriveClient();
+
   if (!drive) {
+    console.warn("No Drive client — using demo categories");
     return DEMO_CATEGORIES;
   }
 
   const rootId = process.env.GOOGLE_DRIVE_ROOT_FOLDER_ID!;
 
-  const foldersRes = await drive.files.list({
-    q: `'${rootId}' in parents and mimeType='application/vnd.google-apps.folder' and trashed=false`,
-    fields: 'files(id, name)',
-    pageSize: 50,
-  });
-
-  const categories: Category[] = [];
-
-  for (const folder of foldersRes.data.files || []) {
-    const images = await getMediaFromFolder(folder.id!);
-    categories.push({
-      id: folder.id!,
-      title: folder.name!,
-      slug: folder.name!.toLowerCase().replace(/\s+/g, '-'),
-      images,
+  try {
+    const foldersRes = await drive.files.list({
+      q: `'${rootId}' in parents and mimeType='application/vnd.google-apps.folder' and trashed=false`,
+      fields: "files(id, name)",
+      pageSize: 50,
     });
-  }
 
-  return categories.sort((a, b) => a.title.localeCompare(b.title));
+    const categories: Category[] = [];
+
+    for (const folder of foldersRes.data.files || []) {
+      const images = await getMediaFromFolder(drive, folder.id!);
+      categories.push({
+        id: folder.id!,
+        title: folder.name!,
+        slug: folder.name!.toLowerCase().replace(/\s+/g, "-"),
+        images,
+      });
+    }
+
+    return categories.sort((a, b) => a.title.localeCompare(b.title));
+  } catch (e) {
+    console.error("Error fetching categories from Drive:", e);
+    return DEMO_CATEGORIES;
+  }
 }
 
 export async function getCategoryBySlug(slug: string): Promise<Category | null> {
@@ -97,18 +113,22 @@ export async function getCategoryBySlug(slug: string): Promise<Category | null> 
   return categories.find((c) => c.slug === slug) || null;
 }
 
-async function getMediaFromFolder(folderId: string): Promise<DriveImage[]> {
+async function getMediaFromFolder(drive: any, folderId: string): Promise<DriveImage[]> {
   const res = await drive.files.list({
     q: `'${folderId}' in parents and trashed=false`,
-    fields: 'files(id, name, mimeType, thumbnailLink, webViewLink)',
+    fields: "files(id, name, mimeType, thumbnailLink, webViewLink)",
     pageSize: 50,
   });
 
   return (res.data.files || []).map((file: any) => ({
     id: file.id!,
     title: file.name!,
-    url: `https://drive.google.com/uc?id=${file.id}`,
-    thumbnailUrl: file.thumbnailLink || `https://drive.google.com/thumbnail?id=${file.id}&sz=w400`,
-    type: file.mimeType?.startsWith('video') ? 'video' : 'image',
+    url: file.mimeType?.startsWith("video")
+      ? `https://drive.google.com/file/d/${file.id}/preview`
+      : `https://drive.google.com/uc?id=${file.id}`,
+    thumbnailUrl:
+      file.thumbnailLink ||
+      `https://drive.google.com/thumbnail?id=${file.id}&sz=w400`,
+    type: file.mimeType?.startsWith("video") ? "video" : "image",
   }));
 }
