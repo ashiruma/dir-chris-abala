@@ -3,8 +3,9 @@ import Link from "next/link";
 import GalleryGrid from "@/components/gallery-grid";
 import { getCategoryBySlug } from "@/lib/google-drive";
 
-export default async function CategoryPage({ params }: { params: { slug: string } }) {
-  const category = await getCategoryBySlug(params.slug);
+export default async function CategoryPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const category = await getCategoryBySlug(slug);
 
   if (!category) return notFound();
 
