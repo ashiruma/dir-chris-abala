@@ -3,38 +3,55 @@ import ContactSection from "@/components/contact-section";
 import React from "react";
 
 export default function Home() {
-  return (
-    <main style={{ backgroundColor: "#291011" }}>
+  const marqueeItemStyle: React.CSSProperties = {
+    color: "#3d2325",
+    fontFamily: "'Montserrat', sans-serif",
+    fontSize: "0.7em",
+    textTransform: "uppercase",
+    letterSpacing: "0.4em",
+    fontWeight: 700,
+    flexShrink: 0,
+    marginRight: "48px",
+  };
 
-      {/* HERO */}
+  return (
+    <main style={{ backgroundColor: "#291011", color: "#f4f4f4" }}>
+
+      {/* 1. HERO */}
       <section style={{ minHeight: "100vh", display: "flex", flexDirection: "column", justifyContent: "center", padding: "80px 40px", borderBottom: "1px solid #3d2325" }}>
         <div style={{ maxWidth: "1200px", margin: "0 auto", width: "100%" }}>
 
           <div style={{ display: "flex", alignItems: "center", gap: "16px", marginBottom: "40px" }}>
             <span className="section-divider-green" />
-            <span className="section-tag">Cinematic Video Editor — Remote Worldwide</span>
+            <span style={{ fontSize: "10px", textTransform: "uppercase", letterSpacing: "3px", color: "#16a34a", fontWeight: "bold" }}>
+              Director of Production & Compliance — Remote Worldwide
+            </span>
           </div>
 
-          <h1 style={{ fontFamily: "'Oswald', sans-serif", fontSize: "clamp(2.5em, 7vw, 6em)", fontWeight: 700, textTransform: "uppercase", lineHeight: 0.95, marginBottom: "32px", color: "#f4f4f4" }}>
-            Cinematic Video Editor <br />
-            <span style={{ color: "#291011", WebkitTextStroke: "2px #16a34a" } as React.CSSProperties}>for Brands, Agencies</span> <br />
-            <span style={{ color: "#facc15" }}>&amp; YouTube Channels</span>
+          <h1 style={{ fontFamily: "'Oswald', sans-serif", fontSize: "clamp(2.5em, 7vw, 6em)", fontWeight: 700, textTransform: "uppercase", lineHeight: 0.95, marginBottom: "32px" }}>
+            High-Fidelity <br />
+            <span style={{ color: "#291011", WebkitTextStroke: "2px #16a34a" } as React.CSSProperties}>Visual Production</span> <br />
+            <span style={{ color: "#facc15" }}>at Global Standards.</span>
           </h1>
 
-          <p style={{ color: "#999", fontSize: "1.05em", lineHeight: 1.9, fontWeight: 300, maxWidth: "600px", marginBottom: "48px" }}>
-            I help creators and media companies produce structured, high-retention video content that drives engagement, monetization, and long-term brand authority.
+          <p style={{ color: "#999", fontSize: "1.05em", lineHeight: 1.9, fontWeight: 300, maxWidth: "600px", marginBottom: "24px" }}>
+            Transforming creative hustle into institutional power through professional production standards. Built for corporate contracts, international NGOs, and high-budget commercial productions.
+          </p>
+
+          <p style={{ color: "#555", fontSize: "0.8em", fontStyle: "italic", maxWidth: "560px", marginBottom: "48px", fontFamily: "'Montserrat', sans-serif", letterSpacing: "0.05em" }}>
+            "High-value clients aren't buying nice pictures. They're buying reliability, risk management, and professional standards."
           </p>
 
           <div style={{ display: "flex", gap: "16px", flexWrap: "wrap", marginBottom: "64px" }}>
             <Link href="/work" className="btn-outline">View Selected Work</Link>
-            <Link href="/#contact" className="btn-solid">Request Project Quote</Link>
+            <Link href="/#contact" className="btn-solid">Secure a Consultation</Link>
           </div>
 
           <div style={{ display: "flex", gap: "40px", flexWrap: "wrap", borderTop: "1px solid #3d2325", paddingTop: "32px" }}>
             {[
-              { label: "10+ Years", sub: "Editing Experience" },
+              { label: "10+ Years", sub: "Editorial Experience" },
               { label: "Co-Founder", sub: "Mbogiwood Productions PLC" },
-              { label: "Former Tutor", sub: "Filamu Juani" },
+              { label: "Director", sub: "Production & Compliance" },
             ].map((item) => (
               <div key={item.label}>
                 <p style={{ fontFamily: "'Oswald', sans-serif", color: "#facc15", fontSize: "1.3em", textTransform: "uppercase", letterSpacing: "1px" }}>{item.label}</p>
@@ -46,7 +63,20 @@ export default function Home() {
         </div>
       </section>
 
-      {/* PROBLEM / SOLUTION */}
+      {/* 2. TRUST MARQUEE */}
+      <div style={{ backgroundColor: "#1a1a1a", borderBottom: "1px solid #3d2325", padding: "30px 0", overflow: "hidden" }}>
+        <div style={{ display: "flex", whiteSpace: "nowrap" }}>
+          {[1, 2, 3].map((group) => (
+            <div key={group} style={{ display: "flex" }}>
+              {["Technical Compliance", "Cinematic Quality", "Industry Standards", "Legal Clearances", "Production Governance", "Global Standards"].map((item) => (
+                <span key={`${group}-${item}`} style={marqueeItemStyle}>{item} •</span>
+              ))}
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* 3. PROBLEM / SOLUTION */}
       <section style={{ padding: "100px 40px", backgroundColor: "#1a1a1a", borderBottom: "1px solid #3d2325" }}>
         <div style={{ maxWidth: "1200px", margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "80px", alignItems: "start" }}>
           <div>
@@ -90,7 +120,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* SERVICES */}
+      {/* 4. SERVICES */}
       <section id="services" style={{ padding: "100px 40px", borderBottom: "1px solid #3d2325" }}>
         <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
           <div style={{ textAlign: "center", marginBottom: "64px" }}>
@@ -152,8 +182,43 @@ export default function Home() {
         </div>
       </section>
 
-      {/* CASE STUDIES / EXPERIENCE */}
+      {/* 5. COMPLIANCE — RISK SHIELD */}
       <section style={{ padding: "100px 40px", backgroundColor: "#1a1a1a", borderBottom: "1px solid #3d2325" }}>
+        <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: "16px", marginBottom: "24px" }}>
+            <span className="section-divider-green" />
+            <span className="section-tag">Why Compliance Matters</span>
+          </div>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "60px", alignItems: "start" }}>
+            <div>
+              <h2 style={{ fontFamily: "'Oswald', sans-serif", fontSize: "clamp(1.8em, 3vw, 2.5em)", textTransform: "uppercase", color: "#f4f4f4", marginBottom: "20px" }}>
+                Compliance is Your <br /><span style={{ color: "#facc15" }}>Risk Shield</span>
+              </h2>
+              <p style={{ color: "#777", lineHeight: 1.9, fontSize: "0.95em", marginBottom: "24px" }}>
+                Large organizations fear amateur mistakes. By acting as Director of Compliance, I ensure all legal clearances, technical specs, and data protocols are handled — protecting your brand's reputation at every stage.
+              </p>
+              <p style={{ color: "#777", lineHeight: 1.9, fontSize: "0.95em" }}>
+                Most editors list "video editing." Listing "Production Compliance" immediately justifies a higher price point and broader scope of authority.
+              </p>
+            </div>
+            <div style={{ display: "grid", gap: "16px" }}>
+              {[
+                { title: "Institutional Trust", desc: "Corporations and NGOs buy reliability, not just creativity.", color: "#16a34a" },
+                { title: "Repeatable Systems", desc: "Compliance standards prove results aren't a fluke.", color: "#facc15" },
+                { title: "Global Market Ready", desc: "Every delivery meets international technical and legal standards.", color: "#e67e22" },
+              ].map((item) => (
+                <div key={item.title} style={{ padding: "24px", borderLeft: `3px solid ${item.color}`, backgroundColor: "#291011" }}>
+                  <p style={{ fontFamily: "'Oswald', sans-serif", fontSize: "1em", textTransform: "uppercase", letterSpacing: "1px", color: "#f4f4f4", marginBottom: "8px" }}>{item.title}</p>
+                  <p style={{ color: "#666", fontSize: "0.82em", lineHeight: 1.7, fontFamily: "'Montserrat', sans-serif" }}>{item.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 6. EXPERIENCE */}
+      <section style={{ padding: "100px 40px", borderBottom: "1px solid #3d2325" }}>
         <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
           <div style={{ display: "flex", alignItems: "center", gap: "16px", marginBottom: "16px" }}>
             <span className="section-divider-green" />
@@ -198,7 +263,7 @@ export default function Home() {
                 impact: ["10+ years hands-on editorial experience", "Adapted across evolving digital platforms", "Built retention-driven editing methodology"],
               },
             ].map((exp) => (
-              <div key={exp.role} style={{ backgroundColor: "#291011", borderLeft: `4px solid ${exp.color}`, padding: "36px", borderRadius: "4px" }}>
+              <div key={exp.role} style={{ backgroundColor: "#1a1a1a", borderLeft: `4px solid ${exp.color}`, padding: "36px", borderRadius: "4px" }}>
                 <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "32px", alignItems: "start" }}>
                   <div>
                     <h3 style={{ fontFamily: "'Oswald', sans-serif", fontSize: "1.3em", textTransform: "uppercase", color: "#f4f4f4", marginBottom: "4px" }}>{exp.role}</h3>
@@ -244,26 +309,26 @@ export default function Home() {
             </p>
 
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "24px" }}>
-              <div style={{ backgroundColor: "#291011", borderTop: "3px solid #16a34a", padding: "36px", borderRadius: "4px" }}>
+              <div style={{ backgroundColor: "#1a1a1a", borderTop: "3px solid #16a34a", padding: "36px", borderRadius: "4px" }}>
                 <p style={{ color: "#555", fontSize: "0.65em", textTransform: "uppercase", letterSpacing: "2px", marginBottom: "12px" }}>Executive Editorial Direction</p>
                 <h4 style={{ fontFamily: "'Oswald', sans-serif", fontSize: "1.3em", textTransform: "uppercase", color: "#f4f4f4", marginBottom: "4px" }}>Chrispine Abala Ashiruma</h4>
-                <p style={{ color: "#16a34a", fontSize: "0.75em", textTransform: "uppercase", letterSpacing: "2px", marginBottom: "24px" }}>Cinematic Video Editor & Director</p>
+                <p style={{ color: "#16a34a", fontSize: "0.75em", textTransform: "uppercase", letterSpacing: "2px", marginBottom: "24px" }}>Director of Production & Compliance</p>
                 <ul style={{ listStyle: "none", padding: 0 }}>
-                  {["Story structure oversight", "Editorial supervision", "Post-production leadership", "Narrative alignment"].map((item) => (
-                    <li key={item} style={{ color: "#999", fontSize: "0.85em", padding: "6px 0", borderBottom: "1px solid #1a1a1a", display: "flex", alignItems: "center", gap: "8px" }}>
+                  {["Story structure oversight", "Editorial supervision", "Compliance and governance", "Post-production leadership", "Narrative alignment"].map((item) => (
+                    <li key={item} style={{ color: "#999", fontSize: "0.85em", padding: "6px 0", borderBottom: "1px solid #291011", display: "flex", alignItems: "center", gap: "8px" }}>
                       <span style={{ color: "#16a34a" }}>→</span> {item}
                     </li>
                   ))}
                 </ul>
               </div>
 
-              <div style={{ backgroundColor: "#291011", borderTop: "3px solid #facc15", padding: "36px", borderRadius: "4px" }}>
+              <div style={{ backgroundColor: "#1a1a1a", borderTop: "3px solid #facc15", padding: "36px", borderRadius: "4px" }}>
                 <p style={{ color: "#555", fontSize: "0.65em", textTransform: "uppercase", letterSpacing: "2px", marginBottom: "12px" }}>Producer / Production Management</p>
                 <h4 style={{ fontFamily: "'Oswald', sans-serif", fontSize: "1.3em", textTransform: "uppercase", color: "#f4f4f4", marginBottom: "4px" }}>Amaica Media</h4>
                 <p style={{ color: "#facc15", fontSize: "0.75em", textTransform: "uppercase", letterSpacing: "2px", marginBottom: "24px" }}>Production Partner</p>
                 <ul style={{ listStyle: "none", padding: 0 }}>
                   {["Production coordination", "Budget supervision", "Logistics and scheduling", "Operational execution", "Stakeholder management", "Delivery oversight"].map((item) => (
-                    <li key={item} style={{ color: "#999", fontSize: "0.85em", padding: "6px 0", borderBottom: "1px solid #1a1a1a", display: "flex", alignItems: "center", gap: "8px" }}>
+                    <li key={item} style={{ color: "#999", fontSize: "0.85em", padding: "6px 0", borderBottom: "1px solid #291011", display: "flex", alignItems: "center", gap: "8px" }}>
                       <span style={{ color: "#facc15" }}>→</span> {item}
                     </li>
                   ))}
@@ -271,7 +336,7 @@ export default function Home() {
               </div>
             </div>
 
-            <div style={{ marginTop: "24px", backgroundColor: "#291011", padding: "28px 32px", borderLeft: "4px solid #e67e22" }}>
+            <div style={{ marginTop: "24px", backgroundColor: "#1a1a1a", padding: "28px 32px", borderLeft: "4px solid #e67e22" }}>
               <p style={{ fontFamily: "'Oswald', sans-serif", color: "#e67e22", fontSize: "0.85em", textTransform: "uppercase", letterSpacing: "2px", marginBottom: "16px" }}>Structured Production Model</p>
               <p style={{ color: "#999", fontSize: "0.85em", lineHeight: 1.8, marginBottom: "16px" }}>
                 Projects executed under a dual-structure model — creative direction and editorial oversight led by Chrispine Abala, production management and coordination handled by Amaica Media.
@@ -289,7 +354,38 @@ export default function Home() {
         </div>
       </section>
 
-      {/* VS AGENCY */}
+      {/* 7. PRODUCTION LIFECYCLE */}
+      <section style={{ padding: "100px 40px", backgroundColor: "#1a1a1a", borderBottom: "1px solid #3d2325" }}>
+        <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
+          <div style={{ marginBottom: "60px" }}>
+            <p style={{ color: "#16a34a", textTransform: "uppercase", letterSpacing: "4px", fontSize: "10px", fontWeight: "bold", marginBottom: "10px" }}>Our Workflow</p>
+            <h2 style={{ fontFamily: "'Oswald', sans-serif", fontSize: "clamp(1.8em, 3vw, 2.8em)", textTransform: "uppercase", color: "#f4f4f4" }}>
+              How Projects <span style={{ color: "#facc15" }}>Move Forward</span>
+            </h2>
+            <p style={{ color: "#777", fontSize: "0.85em", marginTop: "12px", textTransform: "uppercase", letterSpacing: "2px" }}>
+              Clear scope. Clear timelines. No ambiguity.
+            </p>
+          </div>
+
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: "2px", backgroundColor: "#3d2325" }}>
+            {[
+              { step: "01", title: "Discovery & Strategy", desc: "Brand objectives defined. Roadmap aligned with commercial goals.", color: "#16a34a" },
+              { step: "02", title: "Story Structure", desc: "Narrative architecture built before a single frame is captured or cut.", color: "#facc15" },
+              { step: "03", title: "Compliant Execution", desc: "Technical specs, legal clearances, and on-set standards managed.", color: "#e67e22" },
+              { step: "04", title: "Editorial Review", desc: "Up to 3 revision cycles with structured feedback integration.", color: "#16a34a" },
+              { step: "05", title: "Precision Delivery", desc: "Final output meets global market standards. Clean handover.", color: "#facc15" },
+            ].map((item) => (
+              <div key={item.step} style={{ backgroundColor: "#291011", padding: "40px 24px" }}>
+                <p style={{ fontFamily: "'Oswald', sans-serif", color: item.color, fontSize: "1.5em", marginBottom: "10px" }}>{item.step}</p>
+                <h4 style={{ fontFamily: "'Oswald', sans-serif", color: "#f4f4f4", fontSize: "0.9em", textTransform: "uppercase", letterSpacing: "1px", marginBottom: "10px" }}>{item.title}</h4>
+                <p style={{ color: "#666", fontSize: "0.8em", lineHeight: 1.6, fontFamily: "'Montserrat', sans-serif" }}>{item.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 8. VS AGENCY */}
       <section style={{ padding: "100px 40px", borderBottom: "1px solid #3d2325" }}>
         <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
           <div style={{ display: "flex", alignItems: "center", gap: "16px", marginBottom: "24px" }}>
@@ -297,22 +393,23 @@ export default function Home() {
             <span className="section-tag">Why Independent</span>
           </div>
           <h2 style={{ fontFamily: "'Oswald', sans-serif", fontSize: "clamp(1.8em, 3vw, 2.8em)", textTransform: "uppercase", color: "#f4f4f4", marginBottom: "48px" }}>
-            Independent Editor <span style={{ color: "#facc15" }}>vs Agency Model</span>
+            Independent Director <span style={{ color: "#facc15" }}>vs Agency Model</span>
           </h2>
 
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "2px", marginBottom: "40px" }}>
             <div style={{ backgroundColor: "#16a34a", padding: "16px 24px" }}>
-              <p style={{ fontFamily: "'Oswald', sans-serif", color: "#fff", fontSize: "0.9em", textTransform: "uppercase", letterSpacing: "2px" }}>Independent Editor (Me)</p>
+              <p style={{ fontFamily: "'Oswald', sans-serif", color: "#fff", fontSize: "0.9em", textTransform: "uppercase", letterSpacing: "2px" }}>Director-Led Production (Me)</p>
             </div>
             <div style={{ backgroundColor: "#3d2325", padding: "16px 24px" }}>
               <p style={{ fontFamily: "'Oswald', sans-serif", color: "#999", fontSize: "0.9em", textTransform: "uppercase", letterSpacing: "2px" }}>Agency Model</p>
             </div>
             {[
-              ["Direct communication", "Layered communication"],
-              ["Director-level story understanding", "Often junior editors"],
-              ["Strategic narrative input", "Execution-focused"],
-              ["Faster revisions", "Approval bottlenecks"],
-              ["Custom scope pricing", "Overhead-driven pricing"],
+              ["Direct access to the decision-maker", "Layered account management"],
+              ["Director-level compliance oversight", "Often junior editors"],
+              ["Strategic narrative input", "Execution-focused only"],
+              ["Faster revisions, no bottlenecks", "Approval chains slow delivery"],
+              ["Custom scope, transparent pricing", "Overhead-driven pricing"],
+              ["Scalable via production network", "Fixed team overhead"],
             ].map(([mine, theirs], i) => (
               <React.Fragment key={i}>
                 <div style={{ backgroundColor: "#1a1a1a", padding: "16px 24px", borderLeft: "3px solid #16a34a" }}>
@@ -336,41 +433,38 @@ export default function Home() {
         </div>
       </section>
 
-      {/* PROCESS */}
+      {/* 9. NETWORK */}
       <section style={{ padding: "100px 40px", backgroundColor: "#1a1a1a", borderBottom: "1px solid #3d2325" }}>
         <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
-          <div style={{ textAlign: "center", marginBottom: "64px" }}>
-            <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "16px", marginBottom: "16px" }}>
-              <span className="section-divider-green" />
-              <span className="section-tag">Process</span>
-              <span className="section-divider-green" />
-            </div>
-            <h2 style={{ fontFamily: "'Oswald', sans-serif", fontSize: "clamp(1.8em, 3vw, 2.8em)", textTransform: "uppercase", color: "#f4f4f4" }}>
-              How Projects <span style={{ color: "#facc15" }}>Move Forward</span>
-            </h2>
-            <p style={{ color: "#777", fontSize: "0.85em", marginTop: "12px", textTransform: "uppercase", letterSpacing: "2px" }}>
-              Clear scope. Clear timelines. No ambiguity.
-            </p>
+          <div style={{ display: "flex", alignItems: "center", gap: "16px", marginBottom: "24px" }}>
+            <span className="section-divider-green" />
+            <span className="section-tag">The Network</span>
           </div>
+          <h2 style={{ fontFamily: "'Oswald', sans-serif", fontSize: "clamp(1.8em, 3vw, 2.8em)", textTransform: "uppercase", color: "#f4f4f4", marginBottom: "16px" }}>
+            Solo Director. <span style={{ color: "#facc15" }}>Full Production</span> <span style={{ color: "#16a34a" }}>Capability.</span>
+          </h2>
+          <p style={{ color: "#777", fontSize: "0.95em", lineHeight: 1.9, maxWidth: "700px", marginBottom: "56px" }}>
+            Independent doesn't mean isolated. A structured production network means scalability — from a single-camera headshot to a 20-person commercial set. The right professionals, assembled for each scope.
+          </p>
 
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: "2px" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: "2px", backgroundColor: "#3d2325" }}>
             {[
-              { step: "01", title: "Project Brief", color: "#16a34a" },
-              { step: "02", title: "Story Structure Alignment", color: "#facc15" },
-              { step: "03", title: "First Cut Delivery", color: "#e67e22" },
-              { step: "04", title: "Up to 3 Revisions", color: "#16a34a" },
-              { step: "05", title: "Final Delivery", color: "#facc15" },
+              { role: "Director & Editor", name: "Chrispine Abala", note: "Creative authority. Editorial oversight.", color: "#16a34a" },
+              { role: "Production Management", name: "Amaica Media", note: "Logistics, budget, delivery.", color: "#facc15" },
+              { role: "On-Set Crew", name: "Network — Per Project", note: "Scaled to production scope.", color: "#e67e22" },
+              { role: "Post-Production", name: "Structured Workflow", note: "Premiere Pro · After Effects · DaVinci.", color: "#16a34a" },
             ].map((item) => (
-              <div key={item.step} style={{ backgroundColor: "#291011", padding: "32px 24px", textAlign: "center", borderTop: `3px solid ${item.color}` }}>
-                <p style={{ fontFamily: "'Oswald', sans-serif", color: item.color, fontSize: "2em", marginBottom: "12px" }}>{item.step}</p>
-                <p style={{ fontFamily: "'Oswald', sans-serif", color: "#f4f4f4", fontSize: "0.9em", textTransform: "uppercase", letterSpacing: "1px" }}>{item.title}</p>
+              <div key={item.role} style={{ backgroundColor: "#291011", padding: "32px 24px", borderTop: `3px solid ${item.color}` }}>
+                <p style={{ color: "#555", fontSize: "0.65em", textTransform: "uppercase", letterSpacing: "2px", marginBottom: "8px" }}>{item.role}</p>
+                <h3 style={{ fontFamily: "'Oswald', sans-serif", fontSize: "1.1em", textTransform: "uppercase", color: "#f4f4f4", marginBottom: "8px" }}>{item.name}</h3>
+                <p style={{ color: "#666", fontSize: "0.78em", fontFamily: "'Montserrat', sans-serif", lineHeight: 1.6 }}>{item.note}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* AVAILABILITY */}
+      {/* 10. AVAILABILITY */}
       <section id="availability" style={{ padding: "100px 40px", borderBottom: "1px solid #3d2325", textAlign: "center" }}>
         <div style={{ maxWidth: "800px", margin: "0 auto" }}>
           <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "16px", marginBottom: "24px" }}>
@@ -385,17 +479,17 @@ export default function Home() {
             Time zone flexible. Remote-ready workflow. Project-based pricing with custom quotes based on scope.
           </p>
           <div style={{ display: "flex", gap: "12px", flexWrap: "wrap", justifyContent: "center", marginBottom: "48px" }}>
-            {["Long-term Retainers", "Contract-based Editing", "Agency Partnerships", "Documentary Post-Production", "YouTube Channel Editing"].map((item) => (
+            {["Corporate Contracts", "International NGOs", "Long-term Retainers", "Agency Partnerships", "Documentary Post-Production", "YouTube Channel Editing"].map((item) => (
               <span key={item} style={{ border: "1px solid #3d2325", color: "#999", padding: "8px 16px", fontSize: "0.75em", fontFamily: "'Montserrat', sans-serif", textTransform: "uppercase", letterSpacing: "1px" }}>
                 {item}
               </span>
             ))}
           </div>
-          <Link href="/#contact" className="btn-solid">Request a Quote</Link>
+          <Link href="/#contact" className="btn-solid">Secure a Consultation</Link>
         </div>
       </section>
 
-      {/* TESTIMONIALS */}
+      {/* 11. TESTIMONIALS */}
       <section id="testimonials" style={{ padding: "100px 40px", backgroundColor: "#1a1a1a", borderBottom: "1px solid #3d2325" }}>
         <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
           <div style={{ textAlign: "center", marginBottom: "64px" }}>
@@ -432,28 +526,30 @@ export default function Home() {
         </div>
       </section>
 
-      {/* FINAL CTA */}
+      {/* 12. FINAL CTA */}
       <section style={{ padding: "100px 40px", borderBottom: "1px solid #3d2325", textAlign: "center" }}>
         <div style={{ maxWidth: "800px", margin: "0 auto" }}>
           <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "16px", marginBottom: "24px" }}>
             <span className="section-divider-green" />
-            <span className="section-tag">Let's Work</span>
+            <span className="section-tag">Project Inquiry</span>
             <span className="section-divider-green" />
           </div>
           <h2 style={{ fontFamily: "'Oswald', sans-serif", fontSize: "clamp(2em, 4vw, 3.5em)", textTransform: "uppercase", color: "#f4f4f4", marginBottom: "24px" }}>
-            Ready to Build <span style={{ color: "#16a34a" }}>Structured,</span> <br /><span style={{ color: "#facc15" }}>High-Impact Video Content?</span>
+            Ready for <span style={{ color: "#16a34a" }}>Structured,</span> <br /><span style={{ color: "#facc15" }}>High-Fidelity Production?</span>
           </h2>
           <p style={{ color: "#999", fontSize: "1em", lineHeight: 1.9, marginBottom: "40px" }}>
-            Request a quote and outline your project scope.
+            Commercial and documentary bookings open. Request a quote and outline your project scope.
           </p>
-          <Link href="/#contact" className="btn-solid" style={{ fontSize: "1em", padding: "18px 48px" }}>Request a Quote</Link>
+          <Link href="/#contact" className="btn-solid" style={{ fontSize: "1em", padding: "18px 48px" }}>Submit Project Inquiry</Link>
         </div>
       </section>
 
-      {/* CONTACT */}
-      <ContactSection />
+      {/* 13. CONTACT */}
+      <section id="contact">
+        <ContactSection />
+      </section>
 
-      {/* FOOTER */}
+      {/* 14. FOOTER */}
       <footer style={{ backgroundColor: "#1a1a1a", borderTop: "2px solid #16a34a", padding: "40px 20px", textAlign: "center" }}>
         <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
           <p style={{ fontFamily: "'Oswald', sans-serif", fontSize: "1.2em", marginBottom: "8px", textTransform: "uppercase", letterSpacing: "2px" }}>
@@ -461,7 +557,7 @@ export default function Home() {
             <span style={{ color: "#facc15" }}> Abala</span>
           </p>
           <p style={{ fontSize: "0.85em", color: "#999" }}>
-            © {new Date().getFullYear()} All Rights Reserved. Cinematic Video Editor — Remote Worldwide.
+            © {new Date().getFullYear()} All Rights Reserved. Director of Production & Compliance — Remote Worldwide.
           </p>
         </div>
       </footer>
